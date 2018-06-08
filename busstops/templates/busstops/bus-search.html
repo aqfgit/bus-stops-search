@@ -1,4 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>yo</h1>
+{% for d in data  %}
+  <ul>
+    {% for dd in d %}
+      <li>{{ dd }}</li>
+    {% endfor %}
+  </ul>
+{% endfor %}
 {% endblock %}
