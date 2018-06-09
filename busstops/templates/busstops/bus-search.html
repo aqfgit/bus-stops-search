@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block content %}
 {% for d in data  %}
   <ul>
@@ -7,4 +9,5 @@
     {% endfor %}
   </ul>
 {% endfor %}
+<script src="{% static 'busstop/js/main.js' %}"></script>
 {% endblock %}
