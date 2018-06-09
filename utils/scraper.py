@@ -1,7 +1,7 @@
 import bs4 as bs
 import requests
 import datetime
-
+import json
 # python -m run 1.py
 
 
@@ -28,7 +28,7 @@ def get_bus_stops_ids(url):
     return ids
 
 
-def get_current_date_chunks() {
+def get_current_date_chunks():
     now = datetime.datetime.now().strftime("%Y%m%d")
     date_chunks = {
         'year': now[:4],
@@ -37,13 +37,40 @@ def get_current_date_chunks() {
     }
 
     return date_chunks
-}
 
-def run():
-    base_url = 'http://pksbielsko.stop.net.pl/rjaWyszukiwarkaPolaczen.php?data_pol=2018-06-09&pom=1&z_miejsca=I%C5%81OWNICA%2C+CENTRUM&do_miejsca=RUDZICA%2C+2&submit=Szukaj+po%C5%82%C4%85czenia'
+
+def run(raw_data):
+    raw_data = str(raw_data, 'utf-8')
+    bus_stops = json.loads(raw_data)
+
+    date_chunks = get_current_date_chunks()
+    base_url = (
+            'http://pksbielsko.stop.net.pl/rjaWyszukiwarkaPolaczen.php?data_pol={0}-{1}-{2}&pom=1&'
+            'z_miejsca={3}&'
+            'do_miejsca={4}&'
+            'submit=Szukaj+po%C5%82%C4%85czenia'
+            ).format(
+                date_chunks['year'], date_chunks['month'], date_chunks['day'],
+                bus_stops['from'], bus_stops['to']
+                )
     
-    return get_bus_stops_ids(base_url)
+    
+    bus_stops_ids = get_bus_stops_ids(base_url)
 
+    final_url = (
+        'http://pksbielsko.stop.net.pl/rjaWyszukiwarkaPolaczen.php?pom=2&data_pol={0}-{1}-{2}&'
+                 'sz_el_1={3}&'
+                 'sz_el_2={4}&'
+                 'z_miejsca={5}&do_miejsca={6}&'
+                 'submit=Szukaj+po%C5%82%C4%85czenia'
+                 ).format(
+                     date_chunks['year'], date_chunks['month'], date_chunks['day'],
+                     bus_stops['from'], bus_stops['to'],
+                     bus_stops_ids['from'], bus_stops_ids['to']
+                     )
+
+    return final_url
+        
     # source = requests.get(url)
     # source.encoding = 'utf-8'
     # soup = bs.BeautifulSoup(source.text, 'html.parser')
