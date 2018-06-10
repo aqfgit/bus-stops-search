@@ -12,7 +12,6 @@ import json
 def index_view(request):
     if request.method == 'POST':
         data = request.body
-        print(data)
         results = scraper.run(data)
         return HttpResponse(results)
     else:

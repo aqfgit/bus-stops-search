@@ -3,14 +3,18 @@
 
 {% block content %}
 {% csrf_token %}
+<form>
+  <label for="from">Z:</label>
+  <input type="text" id="from">
+  <label for="to">Do:</label>
+  <input type="text" id="to">
+  <button id="search">Wyszukaj</button>
+</form>
 
-{% for d in data  %}
-  <ul>
-    {% for dd in d %}
-      <li>{{ dd }}</li>
-    {% endfor %}
-  </ul>
-{% endfor %}
+<div id="tableData">
+  
+</div>
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

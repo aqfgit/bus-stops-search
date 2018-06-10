@@ -19,24 +19,37 @@ function csrfSafeMethod(method) {
   // these HTTP methods do not require CSRF protection
   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
-$.ajaxSetup({
-  beforeSend: function(xhr, settings) {
-      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
-      }
-  }
-});
-
-const jsonData = {from: 'roztropice, mleczarnia', to: 'jaworze, dolne wiarus'}
-var formattedJsonData = JSON.stringify( jsonData  );
 
 
-$.ajax('http://localhost:8000/bus-search', {
-  type : 'POST',
-  contentType : 'application/json',
-  data : formattedJsonData,
-  success: function (data) {
-      console.log(data)
-  },
-  cache: false
-})
+
+// const jsonData = {from: 'roztropice, mleczarnia', to: 'jaworze, dolne wiarus'}
+// var formattedJsonData = JSON.stringify( jsonData  );
+const inputFrom = document.getElementById('from')
+const inputTo = document.getElementById('to')
+const searchButton = document.getElementById('search')
+
+searchButton.addEventListener('click', searchBusStops)
+
+function searchBusStops() {
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+        });
+
+    const jsonData = {from: inputFrom.value, to: inputTo.value}
+    const formattedJsonData = JSON.stringify(jsonData);
+
+    $.ajax('http://localhost:8000/bus-search', {
+        type : 'POST',
+        contentType : 'application/json',
+        data : formattedJsonData,
+        success: function (data) {
+            console.log(data)
+        },
+        cache: false
+    })
+}
+
