@@ -61,9 +61,12 @@ function createDynamicTableTemplate(row) {
    }
 
 function displayData(data) {
-   
-    data = JSON.parse(data)
-    dataWrap.innerHTML = `
+    jsonData = JSON.parse(data)
+
+    if ((jsonData.error_msg !== undefined) && (jsonData.error_msg !== null)) {
+        dataWrap.innerHTML = `<h2>${jsonData.error_msg}</h2>`
+    } else {
+        dataWrap.innerHTML = `
         <h2>Połączenie ${inputFrom.value} - ${inputTo.value}</h2>
         <table>
             <tr>
@@ -71,8 +74,9 @@ function displayData(data) {
                 <th>Przyjazd</th>
                 <th>Informacje</th>
             </tr>
-           ${data.map(createDynamicTableTemplate).join('')}
+           ${jsonData.map(createDynamicTableTemplate).join('')}
         </table>
     `;
+    }
 }
 

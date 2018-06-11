@@ -13,6 +13,7 @@ def index_view(request):
     if request.method == 'POST':
         data = request.body
         results = scraper.run(data)
+        print(results)
         return HttpResponse(results)
     else:
         return render(request, 'busstops/bus-search.html')
