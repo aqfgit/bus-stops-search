@@ -24,8 +24,16 @@ const inputFrom = document.getElementById('from');
 const inputTo = document.getElementById('to');
 const searchButton = document.getElementById('search');
 const dataWrap = document.getElementById('tableData');
+const reverseButton = document.getElementById('reverse');
 
-searchButton.addEventListener('click', makeAJAXRequestToSerachForBusStops)
+reverseButton.addEventListener('click', reverseBusStopsInputValues);
+searchButton.addEventListener('click', makeAJAXRequestToSerachForBusStops);
+
+function reverseBusStopsInputValues() {
+    fromTmp = inputFrom.value;
+    inputFrom.value = inputTo.value;
+    inputTo.value = fromTmp;
+}
 
 function makeAJAXRequestToSerachForBusStops() {
     $.ajaxSetup({
