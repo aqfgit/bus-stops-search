@@ -62,7 +62,7 @@ def run(raw_data):
     bus_stops = json.loads(raw_data)
 
     date_chunks = get_current_date_chunks()
-
+    
     base_url = (
         'http://pksbielsko.stop.net.pl/rjaWyszukiwarkaPolaczen.php?data_pol={0}-{1}-{2}&pom=1&'
         'z_miejsca={3}&'
@@ -72,7 +72,7 @@ def run(raw_data):
             date_chunks['year'], date_chunks['month'], date_chunks['day'],
             bus_stops['from'], bus_stops['to']
             )
-
+    print(base_url)
     try:
         bus_stops_ids = get_bus_stops_ids(base_url)
     except AttributeError:

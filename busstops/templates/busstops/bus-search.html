@@ -3,16 +3,17 @@
 
 {% block content %}
 {% csrf_token %}
-<form>
+
   <label for="from">Z:</label>
   <input type="text" id="from">
   <label for="to">Do:</label>
   <input type="text" id="to">
   <button id="search">Wyszukaj</button>
-</form>
+
+<!-- nie moze byc w formie bo sie strona odswieza -->
 
 <div id="tableData">
-  
+
 </div>
 
 <script

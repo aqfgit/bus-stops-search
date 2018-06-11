@@ -20,17 +20,14 @@ function csrfSafeMethod(method) {
   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-
-
-// const jsonData = {from: 'roztropice, mleczarnia', to: 'jaworze, dolne wiarus'}
-// var formattedJsonData = JSON.stringify( jsonData  );
 const inputFrom = document.getElementById('from')
 const inputTo = document.getElementById('to')
 const searchButton = document.getElementById('search')
+const dataWrap = document.getElementById('tableData')
 
-searchButton.addEventListener('click', searchBusStops)
+searchButton.addEventListener('click', makeAJAXRequestToSerachForBusStops)
 
-function searchBusStops() {
+function makeAJAXRequestToSerachForBusStops() {
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -47,9 +44,14 @@ function searchBusStops() {
         contentType : 'application/json',
         data : formattedJsonData,
         success: function (data) {
-            console.log(data)
+            displayData(data)
         },
         cache: false
     })
 }
 
+function displayData(data) {
+    dataWrap.innerHTML = `
+        ${data}
+    `
+}
