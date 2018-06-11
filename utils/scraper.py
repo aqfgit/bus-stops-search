@@ -52,9 +52,26 @@ def get_table_data(url):
     for tr in table_rows:
         td = tr.find_all('td')
         row = [i.text for i in td]
+        print(row[1])
         rows.append(row)
 
     return rows
+
+
+def parse_table_rows_to_json(data):
+    rows = {'rows': []}
+    for count, row in enumerate(data):
+        if count == 0:  # first row contains table headers, which we don't need
+            continue
+
+        rows['rows'].append({
+            'time_start': row[1],
+            'time_end': row[2],
+            'info': row[5]
+        })
+
+    json_rows = json.dumps(rows, ensure_ascii=False).encode('utf8')
+    return json_rows
 
 
 def run(raw_data):
@@ -62,7 +79,7 @@ def run(raw_data):
     bus_stops = json.loads(raw_data)
 
     date_chunks = get_current_date_chunks()
-    
+
     base_url = (
         'http://pksbielsko.stop.net.pl/rjaWyszukiwarkaPolaczen.php?data_pol={0}-{1}-{2}&pom=1&'
         'z_miejsca={3}&'
@@ -92,6 +109,7 @@ def run(raw_data):
 
     try:
         table_data = get_table_data(final_url)
-        return table_data
+        json_data = parse_table_rows_to_json(table_data)
+        return json_data
     except AttributeError:
         return 'Autobusy nie na tej trasie nie kursują w tym dniu lub połączenie nie istnieje.'
