@@ -4,19 +4,31 @@
 {% block content %}
 {% csrf_token %}
 
-  <label for="from">Z:</label>
-  <input type="text" id="from">
-  <button id="reverse">Zamień</button>
-  <label for="to">Do:</label>
-  <input type="text" id="to">
-  <button id="search">Wyszukaj</button>
+<nav class="page-nav">
+  <a class="logout-link" href="{% url 'registration:logout' %}">Wyloguj się</a>
+</nav>
 
+<header class="page-header">
+  <h1>Wyszukiwarka połączeń</h1>
+</header>
 
-<div id="tableData">
+<div role="search" class="search-area">
+  <div class="form-group">
+    <label for="from">Z:</label>
+    <input class="text-input" type="search" id="from">
+  </div>
 
+  <button id="reverse" class="reverse-button">&#8646;</button>
+  <div class="form-group">
+    <label for="to">Do:</label>
+    <input class="text-input" type="search" id="to">
+  </div>
+  <button class="submit-button" id="search">Wyszukaj</button>
 </div>
 
-<a class="nav-link" href="{% url 'registration:logout' %}">Wyloguj się</a>
+<div id="tableData" class="data-table">
+
+</div>
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

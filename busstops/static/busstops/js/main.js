@@ -72,10 +72,10 @@ function displayData(data) {
     jsonData = JSON.parse(data)
 
     if ((jsonData.error_msg !== undefined) && (jsonData.error_msg !== null)) {
-        dataWrap.innerHTML = `<h2>${jsonData.error_msg}</h2>`
+        dataWrap.innerHTML = `<h2 class="connectionName">${jsonData.error_msg}</h2>`
     } else {
         dataWrap.innerHTML = `
-        <h2>Połączenie ${inputFrom.value} - ${inputTo.value}</h2>
+        <h2 class="connectionName">Połączenie ${inputFrom.value} - ${inputTo.value}</h2>
         <table>
             <tr>
                 <th>Odjazd</th>

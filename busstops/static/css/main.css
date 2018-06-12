@@ -1,0 +1,56 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.page-header h1 {
+  text-align: center;
+  color: #1995ce;
+  margin-bottom: 30px;
+}
+
+.form-group .label-wrap {
+  margin: 5px 0;
+}
+
+.form-group .text-input {
+  border: 1px solid #eeff05;
+  border-radius: 4px;
+  padding: 10px 10px;
+  font-size: 18px;
+  color: #464444;
+}
+
+.form-group .text-input:focus {
+  border-color: #e5f31e;
+}
+
+.form-group .label-wrap label{
+  font-size: 18px;
+  color: #4e4e4e;
+}
+
+.submit-button {
+  margin: 12px 0;
+  background: #1995ce;
+  color: #ffffff;
+  border: 1px solid #1995ce;
+  border-radius: 4px;
+  padding: 8px 15px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
+
+.submit-button:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+
+.page-nav .logout-link {
+  text-decoration: none;
+  padding: 10px;
+}

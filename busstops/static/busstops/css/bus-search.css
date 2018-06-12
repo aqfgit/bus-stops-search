@@ -1,3 +1,59 @@
-body {
-  background: pink;
+.search-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 10px 300px;
+}
+
+.search-area .reverse-button {
+  margin: 20px 20px;
+  background: #ffffff;
+  border: 1px solid #464444;
+  border-radius: 4px;
+  font-size: 25px;
+  padding: 2px 15px;
+}
+
+.search-area .reverse-button:hover {
+  background: #1995ce65;
+  cursor: pointer;
+}
+
+.search-area .search-button {
+  margin-left: 10px;
+}
+
+.connectionName {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 40px 10px;
+}
+
+.data-table table{
+  display: flex;
+  justify-content: center;
+  border-spacing: 0;
+}
+
+.data-table tr th {
+  margin: 10px 10px;
+  padding: 10px 10px;
+  text-align: left;
+  padding-right: 20px;
+  background-color: #eeff00;
+}
+
+.data-table tr td {
+  text-align: left;
+  padding: 20px 20px 20px 10px;
+}
+
+.data-table tr {
+  text-align: left;
+}
+
+.data-table tr:nth-child(even) {
+  background: #1995ce65;
 }
