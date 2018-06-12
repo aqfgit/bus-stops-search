@@ -9,14 +9,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index_view(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('registration:welcome'))
+        return HttpResponseRedirect(reverse('busstops:index'))
 
     return render(request, 'registration/login.html')
 
 
 def login_view(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('registration:welcome'))
+        return HttpResponseRedirect(reverse('busstops:index'))
 
     try:
         username = request.POST['username']
@@ -27,7 +27,7 @@ def login_view(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponseRedirect(reverse('registration:welcome'))
+        return HttpResponseRedirect(reverse('busstops:index'))
     else:
         return HttpResponseRedirect(reverse('registration:index'))
 
@@ -35,8 +35,3 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('registration:index'))
-
-
-@login_required
-def welcome_view(request):
-    return render(request, 'registration/welcome.html', {'user': request.user})

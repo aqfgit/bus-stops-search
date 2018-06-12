@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-<p>{{user.email}}</p>
-
-<a class="nav-link" href="{% url 'registration:logout' %}">Wyloguj się</a>
-<a class="nav-link" href="{% url 'busstops:index' %}">Wyszukiwarka</a>
-{% endblock %}

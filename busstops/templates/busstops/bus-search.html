@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "busstops/base.html" %}
 {% load static %}
 
 {% block content %}
@@ -6,16 +6,17 @@
 
   <label for="from">Z:</label>
   <input type="text" id="from">
-  <label for="to">Do:</label>
   <button id="reverse">Zamień</button>
+  <label for="to">Do:</label>
   <input type="text" id="to">
   <button id="search">Wyszukaj</button>
 
-<!-- nie moze byc w formie bo sie strona odswieza -->
 
 <div id="tableData">
 
 </div>
+
+<a class="nav-link" href="{% url 'registration:logout' %}">Wyloguj się</a>
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
